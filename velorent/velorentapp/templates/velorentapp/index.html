@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+	<head>
+		<title>VeloRent</title>
+		<meta charset="utf-8">
+		<meta name = "format-detection" content = "telephone=no" />
+		<link rel="icon" href="{% static 'images/favicon.ico' %}">
+		<link rel="shortcut icon" href="{% static 'images/favicon.ico' %}" />
+		<link rel="stylesheet" href="{% static 'booking/css/booking.css' %}">
+		<link rel="stylesheet" href="{% static 'css/camera.css' %}">
+		<link rel="stylesheet" href="{% static 'css/owl.carousel.css' %}">
+		<link rel="stylesheet" href="{% static 'css/style.css' %}">
+		<script src="{% static 'js/jquery.js' %}"></script>
+		<script src="{% static 'js/jquery-migrate-1.2.1.js' %}"></script>
+		<script src="{% static 'js/script.js' %}"></script>
+		<script src="{% static 'js/superfish.js' %}"></script>
+		<script src="{% static 'js/jquery.ui.totop.js' %}"></script>
+		<script src="{% static 'js/jquery.equalheights.js' %}"></script>
+		<script src="{% static 'js/jquery.mobilemenu.js' %}"></script>
+		<script src="{% static 'js/jquery.easing.1.3.js' %}"></script>
+		<script src="{% static 'js/owl.carousel.js' %}"></script>
+		<script src="{% static 'js/camera.js' %}"></script>
+		<!--[if (gt IE 9)|!(IE)]><!-->
+		<script src="{% static 'js/jquery.mobile.customized.min.js' %}"></script>
+		<!--<![endif]-->
+		<script src="{% static 'booking/js/booking.js' %}"></script>
+
+
+		<script>
+			$(document).ready(function(){
+				jQuery('#camera_wrap').camera({
+					loader: false,
+					pagination: false ,
+					minHeight: '444',
+					thumbnails: false,
+					height: '28.28125%',
+					caption: true,
+					navigation: true,
+					fx: 'mosaic'
+				});
+				$().UItoTop({ easingType: 'easeOutQuart' });
+			});
+		</script>
+
+		<style>
+				.hello-msg{
+				font-size: 18px;
+				color: yellow;
+				margin-left:200px;
+			}
+		</style>
+
+	</head>
+	<body class="page1" id="top">
+		<div class="main">
+<!--==============================header=================================-->
+			<header>
+				<div class="menu_block ">
+					<div class="container_12">
+						<div class="grid_12">
+							<nav class="horizontal-nav full-width horizontalNav-notprocessed">
+								<ul class="sf-menu">
+									<li class="current"><a href="{% url 'index' %}">Home</a></li>
+									<li><a href="{% url 'bike' %}">Bike</a></li>
+									<li><a href="{% url 'contact' %}">Contacts</a></li>
+									<li class="hello-msg">Hello ,Mr/Ms {{request.user}}</li>
+									<li class="hello-msg"><a href="{% url 'logout' %}">Logout</a></li>
+								</ul>
+
+							</nav>
+							<div class="clear"></div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</div>
+				<div class="container_12">
+					<div class="grid_12">
+						<h1>
+							<a href="{% url 'index' %}">
+								<img  src="{% static 'logo/logoo.png' %}" alt="Your Happy Family">
+							</a>
+						</h1>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</header>
+			<div class="slider_wrapper ">
+				<div id="camera_wrap" class="">
+					<div data-src="{% static 'logo/velo100.jpg' %}" ></div>
+					<div data-src="{% static 'logo/velo66.jpg' %}" ></div>
+					<div data-src="{% static 'logo/velo44.jpg' %}"></div>
+				</div>
+			</div>
+
+
+<!--			Tariflar -->
+
+			<div class="container_12">
+				<div class="grid_4">
+					{% for hours in hour %}
+					<div class="banner">
+						<div class="maxheight">
+							<div class="banner_title">
+								<img src="{% static 'images/icon1.png' %}" alt="">
+								<div class="extra_wrapper">Bike&amp;
+									<div class="color1">Hour {{hours.price}} $ </div>
+								</div>
+							</div>
+								{{hours.description}}
+							<a href="#" class="fa fa-share-square"></a>
+						</div>
+					</div>
+					{% endfor %}
+
+				</div>
+				<div class="grid_4">
+					{% for days in day %}
+					<div class="banner">
+						<div class="maxheight">
+							<div class="banner_title">
+								<img src="{% static 'images/icon2.png' %}" alt="">
+								<div class="extra_wrapper">Bike&amp;
+									<div class="color1">Day {{days.price}} $ </div>
+								</div>
+							</div>
+								{{days.description}}
+							<a href="#" class="fa fa-share-square"></a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+
+				<div class="grid_4">
+					{% for weeks in week %}
+					<div class="banner">
+						<div class="maxheight">
+							<div class="banner_title">
+								<img src="{% static 'images/icon3.png' %}" alt="">
+								<div class="extra_wrapper">Bike&amp;
+									<div class="color1">Week {{weeks.price}} $ </div>
+								</div>
+							</div>
+								{{weeks.description}}
+							<a href="#" class="fa fa-share-square"></a>
+						</div>
+					</div>
+					{% endfor %}
+				</div>
+				<div class="clear"></div>
+			</div>
+
+
+			<div class="c_phone">
+				<div class="container_12">
+					<div class="grid_12">
+						<div class="fa fa-phone"></div>+ 998 93 535 18 41
+						<span>RENT NOW!</span>
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+			<br>
+			<hr>
+
+			<div class="container_12" align="center">
+				<h1 style="font-size:25px;" >Calculate your Service</h1>
+			</div>
+
+
+			<br>
+			<form action="{% url 'calculate' %}">
+							<div  align="center" class="container"  >
+								<h1 style="font-size:20px;" >Bike Quantity: </h1>
+									<select name="Quantity" >
+										<option>1</option>
+										<option>2</option>
+										<option>3</option>
+										<option>4</option>
+										<option>5</option>
+										<option>6</option>
+										<option>7</option>
+									</select>
+							</div>
+						<br>
+						<div align="center">
+								<h1 style="font-size:20px;" >Tarif Price $ (2$/hour, 5$/day,7$/week) </h1>
+								<select  name="Tarif" >
+									<option>2 </option>
+									<option>5 </option>
+									<option>7 </option>
+								</select>
+							</div>
+				<br>
+				<div align="center" >
+					<button  class="btn" type="submit" >Submit</button>
+				</div>
+				</form>
+			<hr>
+
+
+
+<!--==============================Content=================================-->
+			<div class="content"><div class="ic"></div>
+				<div class="container_12">
+					<div class="grid_5">
+						<h3>Booking Form</h3>
+
+						<form method="POST" action="{% url 'send_message' %}" id="bookingForm">
+							{% csrf_token %}
+							<div class="fl1">
+								<div class="tmInput">
+									<input name="Name" placeHolder="Name" type="text" data-constraints='@NotEmpty @Required @AlphaSpecial'>
+								</div>
+							</div>
+							<div class="fl1">
+								<div class="tmInput">
+									<input name="Email" placeHolder="Email:" type="email" data-constraints="@NotEmpty @Required @Email">
+								</div>
+							</div>
+							<div class="clear"></div>
+							<strong>Time</strong>
+							<div class="tmInput">
+								<input name="Time" placeHolder="" type="time" data-constraints="@NotEmpty @Required">
+							</div>
+							<div class="clear"></div>
+							<strong>Date</strong>
+							<label class="">
+								<input type="Date" name="Date" data-constraints="@NotEmpty @Required @Date">
+							</label>
+							<div class="clear"></div>
+							<div class="clear"></div>
+							<div class="fl1 fl2">
+								<em>Quantity:</em>
+								<select name="Adults" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+									<option>1</option>
+									<option>1</option>
+									<option>2</option>
+									<option>4</option>
+									<option>5</option>
+									<option>6</option>
+									<option>7</option>
+									<option>8</option>
+									<option>9</option>
+									<option>10</option>
+								</select>
+								<div class="clear height1"></div>
+							</div>
+							<div class="fl1 fl2">
+								<em>Tarif : </em>
+								<select name="Tarif" class="tmSelect auto" data-class="tmSelect tmSelect2" data-constraints="">
+									<option>1 Hour</option>
+									<option>1 Day</option>
+									<option>7 Day/1 Week</option>
+								</select>
+							</div>
+							<div class="clear"></div>
+							<div class="tmTextarea">
+								<textarea name="Message" placeHolder="Message" data-constraints='@NotEmpty @Required @Length(min=20,max=999999)'></textarea>
+							</div>
+							<button type="submit" class="btn" >Submit</button>
+						</form>
+					</div>
+
+					<div class="grid_6 prefix_1">
+
+						{% for ecoimg in economy  %}
+							<a href="{{ecoimg.img.url}}" class="type"><img src= {{ecoimg.img.url}} alt=""><span class="type_caption">Economy</span></a>
+						{% endfor %}
+
+						{% for stanimg in standard  %}
+						<a href="{{stanimg.img.url}}" class="type"><img src={{stanimg.img.url}}  alt=""><span class="type_caption">Standard</span></a>
+						{% endfor  %}
+
+						{% for luximg in lux  %}
+						<a href="{{luximg.img.url}}" class="type"><img src= {{luximg.img.url}} alt=""><span class="type_caption">Lux</span></a>
+						{% endfor  %}
+
+					</div>
+					<div class="clear"></div>
+				</div>
+			</div>
+		</div>
+<!--==============================footer=================================-->
+		<footer>
+			<div class="container_12">
+				<div class="grid_12">
+					<div class="f_phone"><span>Call Us:</span> + 998 93 535 18 41</div>
+					<div class="socials">
+						<a href="#" class="fa fa-twitter"></a>
+						<a href="#" class="fa fa-facebook"></a>
+						<a href="#" class="fa fa-instagram"></a>
+						<a href="#" class="fa fa-youtube"></a>
+
+					</div>
+					<div class="copy">
+						<div class="st1">
+						<div class="brand">Velo<span class="color1">R</span>ent </div>
+						&copy; 2021	| <a href="#">All rights reserved. </a> </div>
+					</div>
+				</div>
+				<div class="clear"></div>
+			</div>
+		</footer>
+		<script>
+			$(function (){
+				$('#bookingForm').bookingForm({
+					ownerEmail: '#'
+				});
+			})
+			$(function() {
+				$('#bookingForm input, #bookingForm textarea').placeholder();
+			});
+		</script>
+
+	</body>
+</html>
